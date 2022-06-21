@@ -42,7 +42,7 @@
       
       <!-- List of persistent classes -->
       <mapping class = ""/>
-      
+
       
    </session-factory>
 </hibernate-configuration>
