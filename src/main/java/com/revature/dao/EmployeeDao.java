@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import com.revature.models.Employee;
 import com.revature.util.HibernateUtil;
 
+// servlet -> calls service --> calls dao
 public class EmployeeDao {
 	
 	// CRUD methods
@@ -24,6 +25,7 @@ public class EmployeeDao {
 		// capture the pk returned when the session method save() is called
 		int pk = (int) ses.save(e);
 		
+		tx.commit();
 		// return the pk
 		return pk;
 		
@@ -32,13 +34,13 @@ public class EmployeeDao {
 	// Read
 	public List<Employee> findAll() {
 		
-		//grab the session
+		// grab the session
 		Session ses = HibernateUtil.getSession();
 		
-		//make an HQL -- Hibernate Query Language: odd mix of OOp and native SQL
-		List<Employee> emps = ses.createQuery("from Employee", Employee.class).list();
+		// make an HQL -- Hibernate Query Language: odd mix of OOP & native SQL
+		 List<Employee> emps = ses.createQuery("from Employee", Employee.class).list();
 		
-		//return the list of employees
+		 // return the list of employees
 		return emps;
 		
 	}
