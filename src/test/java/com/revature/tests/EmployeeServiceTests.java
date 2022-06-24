@@ -21,26 +21,25 @@ public class EmployeeServiceTests {
 	private EmployeeDao mockdao;
 	
 	@Before
-	public void setup(){
+	public void setup() {
 		
 		mockdao = mock(EmployeeDao.class);
 		eserv = new EmployeeService(mockdao);
-		
-		
 	}
-
+	
 	@After
 	public void teardown() {
 		
 		mockdao = null;
 		eserv = null;
-		}
+	
+	}
 	
 	@Test
-	
 	public void testConfirmLogin_success() {
-		//1. create a fake list of emps
-		//this is the dummy data we need to feed Mockito
+		
+		// 1. Create a fake list of emps
+		// this is the dummy data we feed to Mockito
 		Employee e1 = new Employee(20, "Bruce", "Banner", "thehulk", "green");
 		Employee e2 = new Employee(21, "Clint", "Barton", "hawkeye", "arrows");
 		
@@ -48,25 +47,25 @@ public class EmployeeServiceTests {
 		emps.add(e1);
 		emps.add(e2);
 		
-		//2. Set up the mock dao's behavior 
-		//findAll() method's behavior to provide fake data
+		
+		// 2. Set up the mock dao's behavior 
+		// findAll() method's behavior to provide fake data
 		when(mockdao.findAll()).thenReturn(emps);
 		
-		//capture the actual output of the method
+		// capture the actual output of the method
 		Employee actual = eserv.confirmLogin("thehulk", "green");
-		//capture the expected output of the methods
+		// capture the expected output of the methods
 		Employee expected = e1;
 		
-		//assert that they are equal
+		
+		// assert that they're equal
 		assertEquals(expected, actual);
 		
 	}
 	
 	@Test
-	
 	public void testConfirmLogin_fail() {
-		//1. create a fake list of emps
-		//this is the dummy data we need to feed Mockito
+		
 		Employee e1 = new Employee(20, "Bruce", "Banner", "thehulk", "green");
 		Employee e2 = new Employee(21, "Clint", "Barton", "hawkeye", "arrows");
 		
@@ -74,19 +73,18 @@ public class EmployeeServiceTests {
 		emps.add(e1);
 		emps.add(e2);
 		
-		//2. Set up the mock dao's behavior 
-		//findAll() method's behavior to provide fake data
+		
+		// 2. Set up the mock dao's behavior 
+		// findAll() method's behavior to provide fake data
 		when(mockdao.findAll()).thenReturn(emps);
 		
-		//capture the actual output of the method
+		// capture the actual output of the method
 		Employee actual = eserv.confirmLogin("thehulk", "blue");
-		//capture the expected output of the methods
+		// capture the expected output of the methods
 		Employee expected = new Employee();
 		
-		//assert that they are equal
+		// assert that they're equal
 		assertEquals(expected, actual);
 		
 	}
-	
 }
-
